@@ -13,7 +13,7 @@ fn main() -> eframe::Result {
         ..Default::default()
     };
     eframe::run_native(
-        "eframe template",
+        "Floord - GUI",
         native_options,
         Box::new(|cc| Ok(Box::new(floord_gui::Menu::new(cc)))),
     )

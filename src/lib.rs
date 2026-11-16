@@ -2,5 +2,5 @@
 
 mod app;
 pub use app::Menu;
-mod views;
 mod services;
+mod views;

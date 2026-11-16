@@ -1,3 +1,6 @@
+use crate::services::configuration::{self, Configuration};
+use crate::views::organizer;
+
 /// We derive Deserialize/Serialize so we can persist app state on shutdown.
 #[derive(serde::Deserialize, serde::Serialize)]
 #[serde(default)] // if we add new fields, give them default values when deserializing old state
@@ -35,14 +38,9 @@ impl Menu {
     }
 }
 
-enum Page {
-    MENU,
-    ORGANIZER,
-    CLEANUP,
-}
-
 impl eframe::App for Menu {
     /// Called each time the UI needs repainting, which may be many times per second.
+
     fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
         // Put your widgets into a `SidePanel`, `TopBottomPanel`, `CentralPanel`, `Window` or `Area`.
         // For inspiration and more examples, go to https://emilk.github.io/egui
@@ -51,19 +49,15 @@ impl eframe::App for Menu {
             // The top panel is often a good place for a menu bar:
 
             egui::MenuBar::new().ui(ui, |ui| {
-                // NOTE: no File->Quit on web pages!
-                ui.menu_button("File", |ui| {
-                    if ui.button("Quit").clicked() {
-                        ui.send_viewport_cmd(egui::ViewportCommand::Close);
-                    }
-                });
-                ui.add_space(16.0);
-
                 egui::widgets::global_theme_preference_buttons(ui);
             });
         });
 
-        egui::CentralPanel::default().show(ui, |_ui| {});
+        egui::CentralPanel::default().show(ui, |ui| {
+            ui.collapsing("Organizer", |ui| {
+                organizer::show(ui);
+            })
+        });
     }
 
     /// Called by the framework to save state before shutdown.

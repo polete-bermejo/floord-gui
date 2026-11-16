@@ -1,4 +1,4 @@
+pub mod cleanup;
+pub mod configuration;
 pub mod installation;
-mod organizer;
-mod cleanup;
-mod configuration;
+pub mod organizer;

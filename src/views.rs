@@ -1,2 +1,2 @@
-pub mod organizer;
 pub mod cleanup;
+pub mod organizer;
