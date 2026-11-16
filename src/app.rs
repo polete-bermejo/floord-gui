@@ -1,4 +1,3 @@
-use crate::services::configuration::{self, Configuration};
 use crate::views::organizer;
 
 /// We derive Deserialize/Serialize so we can persist app state on shutdown.

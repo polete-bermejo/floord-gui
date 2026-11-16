@@ -1,11 +1,8 @@
 use anyhow::{Result, anyhow};
 use serde::{Deserialize, Serialize};
 use std::{
-    env::consts::OS,
-    fs::{self, File, create_dir_all},
-    io::Write,
+    fs::{self, create_dir_all},
     path::PathBuf,
-    str::FromStr,
 };
 
 #[derive(Serialize, Deserialize)]
