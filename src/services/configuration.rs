@@ -37,13 +37,11 @@ impl Default for Configuration {
     }
 }
 
-const CONFIG_FILE: &str = "floord/config.toml";
-
 pub fn get_config_path() -> Result<PathBuf> {
     let config_dir =
         dirs::config_dir().ok_or_else(|| anyhow!("Could not determine config directory"))?;
 
-    Ok(config_dir.join(CONFIG_FILE))
+    Ok(config_dir.join("floord/config.toml"))
 }
 
 pub fn generate_config() -> Result<()> {
@@ -69,6 +67,5 @@ pub fn load_config() -> Result<Configuration> {
 pub fn save_config(config: &Configuration) -> Result<()> {
     let config_path = get_config_path()?;
     let content = toml::to_string_pretty(&config)?;
-    fs::write(config_path, content)?;
-    Ok(())
+    Ok(fs::write(config_path, content)?)
 }
