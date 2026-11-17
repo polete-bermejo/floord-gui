@@ -64,7 +64,6 @@ pub fn load_config() -> Result<Configuration> {
     Ok(config?)
 }
 
-#[warn(unused)]
 pub fn save_config(config: &Configuration) -> Result<()> {
     let config_path = get_config_path()?;
     let content = toml::to_string_pretty(&config)?;
