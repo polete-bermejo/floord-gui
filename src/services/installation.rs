@@ -19,14 +19,14 @@ pub fn install_if_not() -> Result<()> {
     };
 
     if !bin_path.exists() {
-        install(bin_path)?;
+        install(bin_path);
     }
 
     Ok(())
 }
 
 #[cfg(target_os = "linux")]
-fn install(bin_path: PathBuf) -> Result<()> {
+fn install(bin_path: PathBuf) {
     let link = "https://github.com/polete-bermejo/floord/releases/latest/download/floord-linux";
     thread::spawn(move || -> Result<()> {
         let status = Command::new("curl")
@@ -47,11 +47,10 @@ fn install(bin_path: PathBuf) -> Result<()> {
         Ok(())
     });
 
-    Ok(())
 }
 
 #[cfg(target_os = "windows")]
-fn instalal(bin_path: PathBuf) -> Result<()> {
+fn install(bin_path: PathBuf) {
     let link =
         "https://github.com/polete-bermejo/floord/releases/latest/download/floord-windows.exe";
     thread::spawn(move || -> Result<()> {
@@ -66,5 +65,4 @@ fn instalal(bin_path: PathBuf) -> Result<()> {
 
         Ok(())
     });
-    Ok(())
 }
