@@ -1,4 +1,10 @@
-use crate::{services::{configuration::{Configuration, generate_config, load_config}, installation::install_if_not}, views::organizer};
+use crate::{
+    services::{
+        configuration::{Configuration, generate_config, load_config},
+        installation::install_if_not,
+    },
+    views::organizer,
+};
 
 /// We derive Deserialize/Serialize so we can persist app state on shutdown.
 #[derive(serde::Deserialize, serde::Serialize)]
@@ -23,10 +29,12 @@ impl Menu {
 
         install_if_not().unwrap();
         generate_config().unwrap();
-        
+
         // Load previous app state (if any).
         // Note that you must enable the `persistence` feature for this to work.
-        Menu { config: load_config().unwrap() }
+        Menu {
+            config: load_config().unwrap(),
+        }
     }
 }
 

@@ -1,5 +1,5 @@
 use std::env::consts::OS;
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 use std::process::Command;
 use std::thread;
 
@@ -27,7 +27,6 @@ pub fn install_if_not() -> Result<()> {
 
 #[cfg(target_os = "linux")]
 fn install(bin_path: PathBuf) -> Result<()> {
-
     let link = "https://github.com/polete-bermejo/floord/releases/latest/download/floord-linux";
     thread::spawn(move || -> Result<()> {
         let status = Command::new("curl")
@@ -53,16 +52,11 @@ fn install(bin_path: PathBuf) -> Result<()> {
 
 #[cfg(target_os = "windows")]
 fn instalal(bin_path: PathBuf) -> Result<()> {
-
     let link =
         "https://github.com/polete-bermejo/floord/releases/latest/download/floord-windows.exe";
     thread::spawn(move || -> Result<()> {
         let status = Command::new("curl.exe")
-            .args([
-                "-fL",
-                link,
-                "-o"
-            ])
+            .args(["-fL", link, "-o"])
             .arg(bin_path)
             .status()?;
 
